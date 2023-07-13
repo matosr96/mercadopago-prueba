@@ -1,9 +1,9 @@
 import mercadopago from "mercadopago";
+import { HOST, MERCADOPAGO_API_KEY } from "../config";
 
 export const createOrder = async (req, res) => {
   mercadopago.configure({
-    access_token:
-      "TEST-3079556652064646-071218-7b7009a858698ba3e7c5927c35f19303-1422495880",
+    access_token: MERCADOPAGO_API_KEY,
   });
 
   const result = await mercadopago.preferences.create({
@@ -16,9 +16,9 @@ export const createOrder = async (req, res) => {
       },
     ],
     back_urls: {
-      success: "http://localhost:3000/success",
-      failure: "http://localhost:3000/failure",
-      pending: "http://localhost:3000/pending",
+      success: `${HOST}/success`,
+      failure: `${HOST}/failure`,
+      pending: `${HOST}/pending`,
     },
     notification_url: "https://4398-181-78-4-10.ngrok.io/webhook",
   });
